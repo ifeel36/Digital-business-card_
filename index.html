@@ -3,391 +3,403 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>유주현 | 디지털 명함</title>
+  <title>유주현 모바일 명함</title>
   <style>
     :root {
-      --bg: #eef3f8;
-      --card: rgba(255, 255, 255, 0.78);
-      --card-strong: rgba(255, 255, 255, 0.92);
-      --line: rgba(23, 42, 69, 0.1);
-      --text: #163049;
-      --muted: #5f7188;
-      --navy: #1f4b6e;
-      --blue: #2f76a8;
-      --teal: #4a9a9a;
-      --warm: #f2d7c4;
-      --shadow: 0 24px 70px rgba(22, 48, 73, 0.14);
+      --page: #eef1ee;
+      --card: #ffffff;
+      --ink: #182226;
+      --muted: #6a7378;
+      --line: #e0e5e2;
+      --deep: #123d3a;
+      --green: #557b68;
+      --gold: #c69a55;
+      --soft: #f5f7f4;
+      --shadow: 0 24px 70px rgba(18, 61, 58, 0.16);
     }
 
     * {
       box-sizing: border-box;
     }
 
-    html, body {
+    html,
+    body {
       margin: 0;
       min-height: 100%;
     }
 
     body {
-      font-family: "Segoe UI", "Noto Sans KR", "Apple SD Gothic Neo", Arial, sans-serif;
-      color: var(--text);
-      background:
-        radial-gradient(circle at top left, rgba(47, 118, 168, 0.16), transparent 32%),
-        radial-gradient(circle at top right, rgba(74, 154, 154, 0.18), transparent 28%),
-        linear-gradient(180deg, #f7fbff 0%, var(--bg) 100%);
+      min-height: 100vh;
       display: grid;
       place-items: center;
       padding: 24px;
+      color: var(--ink);
+      font-family: "Noto Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", Arial, sans-serif;
+      background:
+        linear-gradient(135deg, rgba(18, 61, 58, 0.06), transparent 34%),
+        linear-gradient(315deg, rgba(198, 154, 85, 0.12), transparent 32%),
+        var(--page);
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .phone-frame {
+      width: min(430px, 100%);
+      border-radius: 28px;
+      padding: 12px;
+      background: #11191b;
+      box-shadow: var(--shadow);
     }
 
     .card {
-      width: min(960px, 100%);
-      border: 1px solid var(--line);
-      border-radius: 28px;
-      background: linear-gradient(180deg, var(--card-strong), var(--card));
-      box-shadow: var(--shadow);
       overflow: hidden;
-      backdrop-filter: blur(20px);
+      border-radius: 20px;
+      background: var(--card);
+      min-height: 720px;
     }
 
-    .top-accent {
-      height: 10px;
-      background: linear-gradient(90deg, var(--navy), var(--blue), var(--teal), var(--warm));
+    .hero {
+      position: relative;
+      padding: 28px 26px 30px;
+      color: #ffffff;
+      background:
+        linear-gradient(145deg, rgba(18, 61, 58, 0.96), rgba(31, 77, 68, 0.92)),
+        var(--deep);
     }
 
-    .content {
-      display: grid;
-      grid-template-columns: 320px 1fr;
-      gap: 0;
+    .hero::after {
+      content: "";
+      position: absolute;
+      left: 26px;
+      right: 26px;
+      bottom: 0;
+      height: 1px;
+      background: rgba(255, 255, 255, 0.22);
+    }
+
+    .topline {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      margin-bottom: 28px;
+      font-size: 12px;
+      font-weight: 700;
+      color: rgba(255, 255, 255, 0.74);
+    }
+
+    .mark {
+      display: inline-grid;
+      place-items: center;
+      width: 38px;
+      height: 38px;
+      border: 1px solid rgba(255, 255, 255, 0.26);
+      border-radius: 8px;
+      color: #ffffff;
+      font-size: 15px;
+      font-weight: 900;
+      background: rgba(255, 255, 255, 0.08);
     }
 
     .profile {
-      padding: 34px 30px;
-      background:
-        linear-gradient(180deg, rgba(31, 75, 110, 0.96), rgba(31, 75, 110, 0.88)),
-        radial-gradient(circle at top, rgba(255,255,255,0.12), transparent 55%);
-      color: #f6fbff;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .profile::after {
-      content: "";
-      position: absolute;
-      inset: auto -40px -60px auto;
-      width: 180px;
-      height: 180px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(242, 215, 196, 0.35), transparent 65%);
-      filter: blur(5px);
-    }
-
-    .portrait-wrap {
-      position: relative;
-      width: 180px;
-      height: 180px;
-      margin-bottom: 22px;
-    }
-
-    .portrait-ring {
-      position: absolute;
-      inset: -8px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, rgba(255,255,255,0.45), rgba(242, 215, 196, 0.15));
-      filter: blur(2px);
+      display: grid;
+      grid-template-columns: 92px 1fr;
+      gap: 18px;
+      align-items: center;
     }
 
     .portrait {
-      position: absolute;
-      inset: 0;
-      border-radius: 50%;
+      width: 92px;
+      height: 92px;
+      border-radius: 14px;
       object-fit: cover;
-      border: 6px solid rgba(255, 255, 255, 0.25);
-      background: #dfe9f3;
+      border: 2px solid rgba(255, 255, 255, 0.42);
+      background: #dfe7e4;
     }
 
     .name {
       margin: 0;
-      font-size: 2rem;
-      line-height: 1.05;
-      letter-spacing: -0.04em;
+      font-size: 31px;
+      line-height: 1.18;
+      font-weight: 900;
+      letter-spacing: 0;
     }
 
-    .title {
-      margin: 8px 0 0;
-      font-size: 1rem;
-      color: rgba(246, 251, 255, 0.88);
-    }
-
-    .lab {
-      margin: 16px 0 0;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 9px 14px;
-      border-radius: 999px;
-      background: rgba(255,255,255,0.12);
-      font-size: 0.92rem;
-      letter-spacing: 0.01em;
-    }
-
-    .quote {
-      margin: 24px 0 0;
-      padding-top: 20px;
-      border-top: 1px solid rgba(255,255,255,0.16);
-      color: rgba(246, 251, 255, 0.85);
-      line-height: 1.8;
-      font-size: 0.96rem;
-    }
-
-    .details {
-      padding: 34px 34px 30px;
-      display: flex;
-      flex-direction: column;
-      gap: 22px;
-    }
-
-    .intro {
-      display: flex;
-      align-items: start;
-      justify-content: space-between;
-      gap: 18px;
-      padding-bottom: 18px;
-      border-bottom: 1px solid var(--line);
-    }
-
-    .intro h1 {
-      margin: 0;
-      font-size: clamp(1.8rem, 4vw, 2.5rem);
-      letter-spacing: -0.05em;
-    }
-
-    .subtitle {
-      margin: 10px 0 0;
-      color: var(--muted);
-      line-height: 1.7;
-      max-width: 52ch;
-    }
-
-    .chip {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 10px 14px;
-      border-radius: 999px;
-      background: rgba(47, 118, 168, 0.08);
-      color: var(--navy);
+    .en-name {
+      margin: 4px 0 0;
+      color: rgba(255, 255, 255, 0.76);
+      font-size: 14px;
       font-weight: 700;
-      font-size: 0.92rem;
-      white-space: nowrap;
     }
 
-    .grid {
-      display: grid;
-      gap: 16px;
-    }
-
-    .section-title {
-      margin: 0;
-      font-size: 1rem;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--navy);
-    }
-
-    .info-list {
-      display: grid;
-      gap: 12px;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-
-    .info {
-      padding: 16px 18px;
-      border: 1px solid var(--line);
-      border-radius: 18px;
-      background: rgba(255, 255, 255, 0.65);
-    }
-
-    .info .label {
-      display: block;
-      font-size: 0.82rem;
-      color: var(--muted);
-      margin-bottom: 6px;
-      letter-spacing: 0.04em;
-    }
-
-    .info .value {
-      font-size: 1.02rem;
-      font-weight: 700;
-      color: var(--text);
-      line-height: 1.45;
+    .job {
+      margin: 12px 0 0;
+      color: #f2d9aa;
+      font-size: 14px;
+      font-weight: 800;
+      line-height: 1.55;
       word-break: keep-all;
     }
 
-    .full {
-      grid-column: 1 / -1;
+    .intro {
+      margin: 22px 0 0;
+      color: rgba(255, 255, 255, 0.86);
+      font-size: 15px;
+      line-height: 1.75;
+      word-break: keep-all;
     }
 
-    .work {
-      padding: 18px;
+    .content {
+      padding: 22px 22px 24px;
+      display: grid;
+      gap: 18px;
+    }
+
+    .section {
       border: 1px solid var(--line);
-      border-radius: 20px;
-      background:
-        linear-gradient(180deg, rgba(47, 118, 168, 0.08), rgba(74, 154, 154, 0.06));
+      border-radius: 8px;
+      background: #ffffff;
+      padding: 18px;
     }
 
-    .work p {
+    .section.soft {
+      background: var(--soft);
+    }
+
+    .label {
+      margin: 0 0 12px;
+      color: var(--deep);
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: 0;
+      text-transform: uppercase;
+    }
+
+    .org {
+      margin: 0;
+      font-size: 18px;
+      font-weight: 850;
+      line-height: 1.55;
+      word-break: keep-all;
+    }
+
+    .region {
       margin: 8px 0 0;
       color: var(--muted);
-      line-height: 1.8;
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .contact-list {
+      display: grid;
+      gap: 10px;
+    }
+
+    .contact {
+      display: grid;
+      grid-template-columns: 76px 1fr;
+      gap: 12px;
+      align-items: baseline;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--line);
+      font-size: 14px;
+    }
+
+    .contact:last-child {
+      padding-bottom: 0;
+      border-bottom: 0;
+    }
+
+    .contact span {
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 900;
+    }
+
+    .contact strong {
+      min-width: 0;
+      color: var(--ink);
+      font-size: 14px;
+      line-height: 1.45;
+      overflow-wrap: anywhere;
+    }
+
+    .skills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .skill {
+      display: inline-flex;
+      align-items: center;
+      min-height: 34px;
+      padding: 8px 10px;
+      border: 1px solid rgba(85, 123, 104, 0.24);
+      border-radius: 8px;
+      background: #ffffff;
+      color: #30463c;
+      font-size: 13px;
+      font-weight: 800;
+      line-height: 1.35;
+    }
+
+    .cta-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .button {
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 46px;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 900;
+      transition: transform 0.18s ease, box-shadow 0.18s ease;
+    }
+
+    .button:hover {
+      transform: translateY(-1px);
+    }
+
+    .button.primary {
+      color: #ffffff;
+      background: var(--deep);
+      box-shadow: 0 10px 22px rgba(18, 61, 58, 0.2);
+    }
+
+    .button.secondary {
+      color: var(--deep);
+      background: #ffffff;
+      border: 1px solid var(--line);
     }
 
     .footer {
-      display: flex;
-      justify-content: space-between;
-      gap: 16px;
-      align-items: center;
-      margin-top: auto;
-      padding-top: 18px;
-      border-top: 1px solid var(--line);
+      padding: 0 22px 24px;
       color: var(--muted);
-      font-size: 0.92rem;
-      flex-wrap: wrap;
+      text-align: center;
+      font-size: 12px;
+      line-height: 1.6;
     }
 
-    .contact-row {
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-    }
-
-    .contact-pill {
-      padding: 10px 14px;
-      border-radius: 999px;
-      background: rgba(31, 75, 110, 0.06);
-      border: 1px solid rgba(31, 75, 110, 0.08);
-      color: var(--text);
-      font-weight: 600;
-    }
-
-    @media (max-width: 860px) {
-      .content {
-        grid-template-columns: 1fr;
-      }
-
-      .profile {
-        display: grid;
-        justify-items: start;
-      }
-
-      .portrait-wrap {
-        width: 160px;
-        height: 160px;
-      }
-
-      .details {
-        padding: 26px 22px 24px;
-      }
-    }
-
-    @media (max-width: 640px) {
+    @media (max-width: 460px) {
       body {
-        padding: 14px;
+        padding: 0;
+        background: #11191b;
+      }
+
+      .phone-frame {
+        width: 100%;
+        min-height: 100vh;
+        border-radius: 0;
+        padding: 0;
+        box-shadow: none;
       }
 
       .card {
-        border-radius: 22px;
+        min-height: 100vh;
+        border-radius: 0;
       }
 
-      .intro {
-        flex-direction: column;
+      .profile {
+        grid-template-columns: 82px 1fr;
+        gap: 16px;
       }
 
-      .info-list {
+      .portrait {
+        width: 82px;
+        height: 82px;
+      }
+
+      .name {
+        font-size: 28px;
+      }
+
+      .cta-row {
         grid-template-columns: 1fr;
       }
     }
   </style>
 </head>
 <body>
-  <main class="card" aria-label="디지털 명함">
-    <div class="top-accent"></div>
-    <div class="content">
-      <section class="profile">
-        <div class="portrait-wrap">
-          <div class="portrait-ring" aria-hidden="true"></div>
+  <main class="phone-frame" aria-label="유주현 모바일 명함">
+    <article class="card">
+      <section class="hero">
+        <div class="topline">
+          <span>Digital Business Card</span>
+          <span class="mark">AX</span>
+        </div>
+
+        <div class="profile">
           <img
             class="portrait"
             src="https://randomuser.me/api/portraits/women/44.jpg"
-            alt="유주현 연구원 프로필 사진"
+            alt="유주현 프로필 사진"
           />
+          <div>
+            <h1 class="name">유주현</h1>
+            <p class="en-name">Juhyun Yoo</p>
+            <p class="job">산업 AX 기술기획자 · AI 프로젝트 매니저</p>
+          </div>
         </div>
 
-        <h2 class="name">유주현</h2>
-        <p class="title">연구원</p>
-        <div class="lab">군산대학교 MoNo lab</div>
-
-        <p class="quote">
-          국가 R&D 행정 지원과 개발 보조를 통해 연구가 더 안정적이고 체계적으로
-          진행될 수 있도록 돕고 있습니다.
+        <p class="intro">
+          AI와 네트워크 기술을 활용해 산업현장의 문제를 해결하는 기술기획자입니다.
         </p>
       </section>
 
-      <section class="details">
-        <div class="intro">
-          <div>
-            <p class="section-title">Digital Business Card</p>
-            <h1>신뢰감 있고 따뜻한 첫인상</h1>
-            <p class="subtitle">
-              전문성과 배려가 함께 느껴지는 명함을 목표로 구성했습니다.
-              지역 사회와 어르신들에게도 편안하게 다가갈 수 있는 부드러운 톤을 담았습니다.
-            </p>
-          </div>
-          <div class="chip">체계적 · 친근함 · 안정감</div>
+      <section class="content">
+        <div class="section soft">
+          <p class="label">Affiliation</p>
+          <p class="org">군산대학교 소프트웨어학과 대학원</p>
+          <p class="region">활동 지역 · 전북 군산</p>
         </div>
 
-        <div class="grid">
-          <p class="section-title">기본 정보</p>
-          <div class="info-list">
-            <div class="info">
-              <span class="label">소속</span>
-              <span class="value">군산대학교 MoNo lab</span>
+        <div class="section">
+          <p class="label">Contact</p>
+          <div class="contact-list">
+            <div class="contact">
+              <span>Email</span>
+              <strong><a href="mailto:ifeel36@naver.com">ifeel36@naver.com</a></strong>
             </div>
-            <div class="info">
-              <span class="label">직함</span>
-              <span class="value">연구원</span>
+            <div class="contact">
+              <span>Phone</span>
+              <strong><a href="tel:01055108848">010-5510-8848</a></strong>
             </div>
-            <div class="info">
-              <span class="label">이름</span>
-              <span class="value">유주현</span>
-            </div>
-            <div class="info">
-              <span class="label">연락처</span>
-              <span class="value">010-5510-8848</span>
-            </div>
-            <div class="info full">
-              <span class="label">주소</span>
-              <span class="value">전북 군산시 0000</span>
+            <div class="contact">
+              <span>GitHub</span>
+              <strong><a href="https://github.com/ifeel36">github.com/ifeel36</a></strong>
             </div>
           </div>
         </div>
 
-        <div class="work">
-          <p class="section-title">주요 업무 및 특징</p>
-          <p>
-            국가 R&D 행정 지원 및 개발 보조
-          </p>
+        <div class="section soft">
+          <p class="label">Core Skills</p>
+          <div class="skills">
+            <span class="skill">AI·AX 프로젝트 기획</span>
+            <span class="skill">데이터 분석 및 시각화</span>
+            <span class="skill">네트워크 기반 산업 관제</span>
+            <span class="skill">Google Cloud 기반 서비스 설계</span>
+            <span class="skill">공공기관 행정 및 사업관리</span>
+          </div>
         </div>
 
-        <div class="footer">
-          <div class="contact-row">
-            <span class="contact-pill">Research Support</span>
-            <span class="contact-pill">Administrative Assistance</span>
-          </div>
-          <div>따뜻함과 신뢰를 담은 디지털 명함</div>
+        <div class="cta-row" aria-label="주요 링크">
+          <a class="button primary" href="mailto:ifeel36@naver.com">이메일 보내기</a>
+          <a class="button secondary" href="https://github.com/ifeel36">GitHub 보기</a>
         </div>
       </section>
-    </div>
+
+      <footer class="footer">
+        Premium mobile business card inspired by popular Canva layouts.
+      </footer>
+    </article>
   </main>
 </body>
 </html>
